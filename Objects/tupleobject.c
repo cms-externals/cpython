@@ -46,7 +46,7 @@ show_track(void)
 
 
 PyObject *
-PyTuple_New(register Py_ssize_t size)
+PyTuple_New(Py_ssize_t size)
 {
     PyTupleObject *op;
     Py_ssize_t i;
@@ -108,7 +108,7 @@ PyTuple_New(register Py_ssize_t size)
 }
 
 Py_ssize_t
-PyTuple_Size(register PyObject *op)
+PyTuple_Size(PyObject *op)
 {
     if (!PyTuple_Check(op)) {
         PyErr_BadInternalCall();
@@ -119,7 +119,7 @@ PyTuple_Size(register PyObject *op)
 }
 
 PyObject *
-PyTuple_GetItem(register PyObject *op, register Py_ssize_t i)
+PyTuple_GetItem(PyObject *op,Py_ssize_t i)
 {
     if (!PyTuple_Check(op)) {
         PyErr_BadInternalCall();
@@ -133,7 +133,7 @@ PyTuple_GetItem(register PyObject *op, register Py_ssize_t i)
 }
 
 int
-PyTuple_SetItem(register PyObject *op, register Py_ssize_t i, PyObject *newitem)
+PyTuple_SetItem(PyObject *op,Py_ssize_t i, PyObject *newitem)
 {
     PyObject *olditem;
     PyObject **p;
@@ -210,7 +210,7 @@ PyTuple_Pack(Py_ssize_t n, ...)
 /* Methods */
 
 static void
-tupledealloc(register PyTupleObject *op)
+tupledealloc(PyTupleObject *op)
 {
     Py_ssize_t i;
     Py_ssize_t len =  Py_SIZE(op);
@@ -380,7 +380,7 @@ tuplecontains(PyTupleObject *a, PyObject *el)
 }
 
 static PyObject *
-tupleitem(register PyTupleObject *a, register Py_ssize_t i)
+tupleitem(PyTupleObject *a,Py_ssize_t i)
 {
     if (i < 0 || i >= Py_SIZE(a)) {
         PyErr_SetString(PyExc_IndexError, "tuple index out of range");
@@ -391,7 +391,7 @@ tupleitem(register PyTupleObject *a, register Py_ssize_t i)
 }
 
 static PyObject *
-tupleslice(register PyTupleObject *a, register Py_ssize_t ilow,
+tupleslice(PyTupleObject *a,Py_ssize_t ilow,
            Py_ssize_t ihigh)
 {
     PyTupleObject *np;
@@ -433,7 +433,7 @@ PyTuple_GetSlice(PyObject *op, Py_ssize_t i, Py_ssize_t j)
 }
 
 static PyObject *
-tupleconcat(register PyTupleObject *a, register PyObject *bb)
+tupleconcat(PyTupleObject *a,PyObject *bb)
 {
     Py_ssize_t size;
     Py_ssize_t i;

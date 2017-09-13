@@ -92,7 +92,7 @@ static int digitlimit[] = {
 **              exceptions - we don't check for them.
 */
 unsigned long
-PyOS_strtoul(register char *str, char **ptr, int base)
+PyOS_strtoul(char *str, char **ptr, int base)
 {
     unsigned long result = 0; /* return value of the function */
     int c;             /* current input character */

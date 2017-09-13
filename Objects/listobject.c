@@ -196,7 +196,7 @@ PyList_GetItem(PyObject *op, Py_ssize_t i)
 }
 
 int
-PyList_SetItem(register PyObject *op, register Py_ssize_t i,
+PyList_SetItem(PyObject *op,Py_ssize_t i,
                PyObject *newitem)
 {
     PyObject *olditem;
