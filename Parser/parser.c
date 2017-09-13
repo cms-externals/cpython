@@ -35,7 +35,7 @@ s_reset(stack *s)
 #define s_empty(s) ((s)->s_top == &(s)->s_base[MAXSTACK])
 
 static int
-s_push(register stack *s, dfa *d, node *parent)
+s_push(stack *s, dfa *d, node *parent)
 {
     stackentry *top;
     if (s->s_top == s->s_base) {
@@ -52,7 +52,7 @@ s_push(register stack *s, dfa *d, node *parent)
 #ifdef Py_DEBUG
 
 static void
-s_pop(register stack *s)
+s_pop(stack *s)
 {
     if (s_empty(s))
         Py_FatalError("s_pop: parser stack underflow -- FATAL");
@@ -105,7 +105,7 @@ PyParser_Delete(parser_state *ps)
 /* PARSER STACK OPERATIONS */
 
 static int
-shift(register stack *s, int type, char *str, int newstate, int lineno, int col_offset)
+shift(stack *s, int type, char *str, int newstate, int lineno, int col_offset)
 {
     int err;
     assert(!s_empty(s));
@@ -117,7 +117,7 @@ shift(register stack *s, int type, char *str, int newstate, int lineno, int col_
 }
 
 static int
-push(register stack *s, int type, dfa *d, int newstate, int lineno, int col_offset)
+push(stack *s, int type, dfa *d, int newstate, int lineno, int col_offset)
 {
     int err;
     node *n;
@@ -217,7 +217,7 @@ future_hack(parser_state *ps)
 #endif /* future keyword */
 
 int
-PyParser_AddToken(register parser_state *ps, register int type, char *str,
+PyParser_AddToken(parser_state *ps,int type, char *str,
                   int lineno, int col_offset, int *expected_ret)
 {
     int ilabel;

@@ -44,7 +44,7 @@
    of the algorithms used, this could save at most be one word anyway. */
 
 static PyLongObject *
-long_normalize(register PyLongObject *v)
+long_normalize(PyLongObject *v)
 {
     Py_ssize_t j = ABS(Py_SIZE(v));
     Py_ssize_t i = j;

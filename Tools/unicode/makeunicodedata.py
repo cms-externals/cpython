@@ -500,7 +500,7 @@ def makeunicodetype(unicode, trace):
     print >>fp, "/* Returns 1 for Unicode characters having the bidirectional"
     print >>fp, " * type 'WS', 'B' or 'S' or the category 'Zs', 0 otherwise."
     print >>fp, " */"
-    print >>fp, 'int _PyUnicode_IsWhitespace(register const Py_UNICODE ch)'
+    print >>fp, 'int _PyUnicode_IsWhitespace(const Py_UNICODE ch)'
     print >>fp, '{'
     print >>fp, '#ifdef WANT_WCTYPE_FUNCTIONS'
     print >>fp, '    return iswspace(ch);'
@@ -533,7 +533,7 @@ def makeunicodetype(unicode, trace):
     print >>fp, " * property 'BK', 'CR', 'LF' or 'NL' or having bidirectional"
     print >>fp, " * type 'B', 0 otherwise."
     print >>fp, " */"
-    print >>fp, 'int _PyUnicode_IsLinebreak(register const Py_UNICODE ch)'
+    print >>fp, 'int _PyUnicode_IsLinebreak(const Py_UNICODE ch)'
     print >>fp, '{'
     print >>fp, '    switch (ch) {'
     haswide = False

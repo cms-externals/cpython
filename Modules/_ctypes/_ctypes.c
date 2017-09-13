@@ -5878,7 +5878,7 @@ init_ctypes(void)
 #if (PY_VERSION_HEX < 0x02040000)
 #ifdef HAVE_WCHAR_H
 
-PyObject *My_PyUnicode_FromWideChar(register const wchar_t *w,
+PyObject *My_PyUnicode_FromWideChar(const wchar_t *w,
                                     Py_ssize_t size)
 {
     PyUnicodeObject *unicode;

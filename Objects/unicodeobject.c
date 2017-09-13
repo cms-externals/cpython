@@ -257,7 +257,7 @@ Py_LOCAL_INLINE(int) unicode_member(Py_UNICODE chr, Py_UNICODE* set, Py_ssize_t 
 /* --- Unicode Object ----------------------------------------------------- */
 
 static
-int unicode_resize(register PyUnicodeObject *unicode,
+int unicode_resize(PyUnicodeObject *unicode,
                    Py_ssize_t length)
 {
     void *oldstr;
@@ -385,7 +385,7 @@ PyUnicodeObject *_PyUnicode_New(Py_ssize_t length)
 }
 
 static
-void unicode_dealloc(register PyUnicodeObject *unicode)
+void unicode_dealloc(PyUnicodeObject *unicode)
 {
     if (PyUnicode_CheckExact(unicode) &&
         numfree < PyUnicode_MAXFREELIST) {
@@ -605,7 +605,7 @@ PyObject *PyUnicode_FromString(const char *u)
 /* Here sizeof(wchar_t) is 4 but Py_UNICODE_SIZE == 2, so we need
    to convert from UTF32 to UTF16. */
 
-PyObject *PyUnicode_FromWideChar(register const wchar_t *w,
+PyObject *PyUnicode_FromWideChar(const wchar_t *w,
                                  Py_ssize_t size)
 {
     PyUnicodeObject *unicode;
@@ -650,7 +650,7 @@ PyObject *PyUnicode_FromWideChar(register const wchar_t *w,
 
 #else
 
-PyObject *PyUnicode_FromWideChar(register const wchar_t *w,
+PyObject *PyUnicode_FromWideChar(const wchar_t *w,
                                  Py_ssize_t size)
 {
     PyUnicodeObject *unicode;
@@ -1160,7 +1160,7 @@ PyObject *PyUnicode_FromOrdinal(int ordinal)
     return PyUnicode_FromUnicode(s, 1);
 }
 
-PyObject *PyUnicode_FromObject(register PyObject *obj)
+PyObject *PyUnicode_FromObject(PyObject *obj)
 {
     /* XXX Perhaps we should make this API an alias of
        PyObject_Unicode() instead ?! */
@@ -1177,7 +1177,7 @@ PyObject *PyUnicode_FromObject(register PyObject *obj)
     return PyUnicode_FromEncodedObject(obj, NULL, "strict");
 }
 
-PyObject *PyUnicode_FromEncodedObject(register PyObject *obj,
+PyObject *PyUnicode_FromEncodedObject(PyObject *obj,
                                       const char *encoding,
                                       const char *errors)
 {
