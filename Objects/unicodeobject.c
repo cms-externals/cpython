@@ -316,7 +316,7 @@ int unicode_resize(register PyUnicodeObject *unicode,
 static
 PyUnicodeObject *_PyUnicode_New(Py_ssize_t length)
 {
-    register PyUnicodeObject *unicode;
+    PyUnicodeObject *unicode;
 
     /* Optimization for empty strings */
     if (length == 0 && unicode_empty != NULL) {
@@ -413,7 +413,7 @@ void unicode_dealloc(register PyUnicodeObject *unicode)
 static
 int _PyUnicode_Resize(PyUnicodeObject **unicode, Py_ssize_t length)
 {
-    register PyUnicodeObject *v;
+    PyUnicodeObject *v;
 
     /* Argument checks */
     if (unicode == NULL) {
@@ -609,7 +609,7 @@ PyObject *PyUnicode_FromWideChar(register const wchar_t *w,
                                  Py_ssize_t size)
 {
     PyUnicodeObject *unicode;
-    register Py_ssize_t i;
+    Py_ssize_t i;
     Py_ssize_t alloc;
     const wchar_t *orig_w;
 
@@ -632,7 +632,7 @@ PyObject *PyUnicode_FromWideChar(register const wchar_t *w,
 
     /* Copy the wchar_t data into the new object */
     {
-        register Py_UNICODE *u;
+        Py_UNICODE *u;
         u = PyUnicode_AS_UNICODE(unicode);
         for (i = size; i > 0; i--) {
             if (*w > 0xFFFF) {
@@ -669,8 +669,8 @@ PyObject *PyUnicode_FromWideChar(register const wchar_t *w,
     memcpy(unicode->str, w, size * sizeof(wchar_t));
 #else
     {
-        register Py_UNICODE *u;
-        register Py_ssize_t i;
+        Py_UNICODE *u;
+        Py_ssize_t i;
         u = PyUnicode_AS_UNICODE(unicode);
         for (i = size; i > 0; i--)
             *u++ = *w++;
@@ -1120,8 +1120,8 @@ Py_ssize_t PyUnicode_AsWideChar(PyUnicodeObject *unicode,
     memcpy(w, unicode->str, size * sizeof(wchar_t));
 #else
     {
-        register Py_UNICODE *u;
-        register Py_ssize_t i;
+        Py_UNICODE *u;
+        Py_ssize_t i;
         u = PyUnicode_AS_UNICODE(unicode);
         for (i = size; i > 0; i--)
             *w++ = *u++;
@@ -3865,7 +3865,7 @@ PyObject *PyUnicode_DecodeASCII(const char *s,
     p = PyUnicode_AS_UNICODE(v);
     e = s + size;
     while (s < e) {
-        register unsigned char c = (unsigned char)*s;
+        unsigned char c = (unsigned char)*s;
         if (c < 128) {
             *p++ = c;
             ++s;
@@ -5255,7 +5255,7 @@ int PyUnicode_EncodeDecimal(Py_UNICODE *s,
     p = s;
     end = s + length;
     while (p < end) {
-        register Py_UNICODE ch = *p;
+        Py_UNICODE ch = *p;
         int decimal;
         PyObject *repunicode;
         Py_ssize_t repsize;
@@ -5540,7 +5540,7 @@ int fixupper(PyUnicodeObject *self)
     int status = 0;
 
     while (len-- > 0) {
-        register Py_UNICODE ch;
+        Py_UNICODE ch;
 
         ch = Py_UNICODE_TOUPPER(*s);
         if (ch != *s) {
@@ -5561,7 +5561,7 @@ int fixlower(PyUnicodeObject *self)
     int status = 0;
 
     while (len-- > 0) {
-        register Py_UNICODE ch;
+        Py_UNICODE ch;
 
         ch = Py_UNICODE_TOLOWER(*s);
         if (ch != *s) {
@@ -5622,8 +5622,8 @@ int fixcapitalize(PyUnicodeObject *self)
 static
 int fixtitle(PyUnicodeObject *self)
 {
-    register Py_UNICODE *p = PyUnicode_AS_UNICODE(self);
-    register Py_UNICODE *e;
+    Py_UNICODE *p = PyUnicode_AS_UNICODE(self);
+    Py_UNICODE *e;
     int previous_is_cased;
 
     /* Shortcut for single character strings */
@@ -5640,7 +5640,7 @@ int fixtitle(PyUnicodeObject *self)
     e = p + PyUnicode_GET_SIZE(self);
     previous_is_cased = 0;
     for (; p < e; p++) {
-        register const Py_UNICODE ch = *p;
+        const Py_UNICODE ch = *p;
 
         if (previous_is_cased)
             *p = Py_UNICODE_TOLOWER(ch);
@@ -6205,7 +6205,7 @@ unicode_compare(PyUnicodeObject *str1, PyUnicodeObject *str2)
 static int
 unicode_compare(PyUnicodeObject *str1, PyUnicodeObject *str2)
 {
-    register Py_ssize_t len1, len2;
+    Py_ssize_t len1, len2;
 
     Py_UNICODE *s1 = str1->str;
     Py_UNICODE *s2 = str2->str;
@@ -6659,9 +6659,9 @@ unicode_hash(PyUnicodeObject *self)
        strings and Unicode objects behave in the same way as
        dictionary keys. */
 
-    register Py_ssize_t len;
-    register Py_UNICODE *p;
-    register long x;
+    Py_ssize_t len;
+    Py_UNICODE *p;
+    long x;
 
 #ifdef Py_DEBUG
     assert(_Py_HashSecret_Initialized);
@@ -6732,8 +6732,8 @@ at least one cased character in S, False otherwise.");
 static PyObject*
 unicode_islower(PyUnicodeObject *self)
 {
-    register const Py_UNICODE *p = PyUnicode_AS_UNICODE(self);
-    register const Py_UNICODE *e;
+    const Py_UNICODE *p = PyUnicode_AS_UNICODE(self);
+    const Py_UNICODE *e;
     int cased;
 
     /* Shortcut for single character strings */
@@ -6747,7 +6747,7 @@ unicode_islower(PyUnicodeObject *self)
     e = p + PyUnicode_GET_SIZE(self);
     cased = 0;
     for (; p < e; p++) {
-        register const Py_UNICODE ch = *p;
+        const Py_UNICODE ch = *p;
 
         if (Py_UNICODE_ISUPPER(ch) || Py_UNICODE_ISTITLE(ch))
             return PyBool_FromLong(0);
@@ -6766,8 +6766,8 @@ at least one cased character in S, False otherwise.");
 static PyObject*
 unicode_isupper(PyUnicodeObject *self)
 {
-    register const Py_UNICODE *p = PyUnicode_AS_UNICODE(self);
-    register const Py_UNICODE *e;
+    const Py_UNICODE *p = PyUnicode_AS_UNICODE(self);
+    const Py_UNICODE *e;
     int cased;
 
     /* Shortcut for single character strings */
@@ -6781,7 +6781,7 @@ unicode_isupper(PyUnicodeObject *self)
     e = p + PyUnicode_GET_SIZE(self);
     cased = 0;
     for (; p < e; p++) {
-        register const Py_UNICODE ch = *p;
+        const Py_UNICODE ch = *p;
 
         if (Py_UNICODE_ISLOWER(ch) || Py_UNICODE_ISTITLE(ch))
             return PyBool_FromLong(0);
@@ -6802,8 +6802,8 @@ Return False otherwise.");
 static PyObject*
 unicode_istitle(PyUnicodeObject *self)
 {
-    register const Py_UNICODE *p = PyUnicode_AS_UNICODE(self);
-    register const Py_UNICODE *e;
+    const Py_UNICODE *p = PyUnicode_AS_UNICODE(self);
+    const Py_UNICODE *e;
     int cased, previous_is_cased;
 
     /* Shortcut for single character strings */
@@ -6819,7 +6819,7 @@ unicode_istitle(PyUnicodeObject *self)
     cased = 0;
     previous_is_cased = 0;
     for (; p < e; p++) {
-        register const Py_UNICODE ch = *p;
+        const Py_UNICODE ch = *p;
 
         if (Py_UNICODE_ISUPPER(ch) || Py_UNICODE_ISTITLE(ch)) {
             if (previous_is_cased)
@@ -6848,8 +6848,8 @@ and there is at least one character in S, False otherwise.");
 static PyObject*
 unicode_isspace(PyUnicodeObject *self)
 {
-    register const Py_UNICODE *p = PyUnicode_AS_UNICODE(self);
-    register const Py_UNICODE *e;
+    const Py_UNICODE *p = PyUnicode_AS_UNICODE(self);
+    const Py_UNICODE *e;
 
     /* Shortcut for single character strings */
     if (PyUnicode_GET_SIZE(self) == 1 &&
@@ -6877,8 +6877,8 @@ and there is at least one character in S, False otherwise.");
 static PyObject*
 unicode_isalpha(PyUnicodeObject *self)
 {
-    register const Py_UNICODE *p = PyUnicode_AS_UNICODE(self);
-    register const Py_UNICODE *e;
+    const Py_UNICODE *p = PyUnicode_AS_UNICODE(self);
+    const Py_UNICODE *e;
 
     /* Shortcut for single character strings */
     if (PyUnicode_GET_SIZE(self) == 1 &&
@@ -6906,8 +6906,8 @@ and there is at least one character in S, False otherwise.");
 static PyObject*
 unicode_isalnum(PyUnicodeObject *self)
 {
-    register const Py_UNICODE *p = PyUnicode_AS_UNICODE(self);
-    register const Py_UNICODE *e;
+    const Py_UNICODE *p = PyUnicode_AS_UNICODE(self);
+    const Py_UNICODE *e;
 
     /* Shortcut for single character strings */
     if (PyUnicode_GET_SIZE(self) == 1 &&
@@ -6935,8 +6935,8 @@ False otherwise.");
 static PyObject*
 unicode_isdecimal(PyUnicodeObject *self)
 {
-    register const Py_UNICODE *p = PyUnicode_AS_UNICODE(self);
-    register const Py_UNICODE *e;
+    const Py_UNICODE *p = PyUnicode_AS_UNICODE(self);
+    const Py_UNICODE *e;
 
     /* Shortcut for single character strings */
     if (PyUnicode_GET_SIZE(self) == 1 &&
@@ -6964,8 +6964,8 @@ and there is at least one character in S, False otherwise.");
 static PyObject*
 unicode_isdigit(PyUnicodeObject *self)
 {
-    register const Py_UNICODE *p = PyUnicode_AS_UNICODE(self);
-    register const Py_UNICODE *e;
+    const Py_UNICODE *p = PyUnicode_AS_UNICODE(self);
+    const Py_UNICODE *e;
 
     /* Shortcut for single character strings */
     if (PyUnicode_GET_SIZE(self) == 1 &&
@@ -6993,8 +6993,8 @@ False otherwise.");
 static PyObject*
 unicode_isnumeric(PyUnicodeObject *self)
 {
-    register const Py_UNICODE *p = PyUnicode_AS_UNICODE(self);
-    register const Py_UNICODE *e;
+    const Py_UNICODE *p = PyUnicode_AS_UNICODE(self);
+    const Py_UNICODE *e;
 
     /* Shortcut for single character strings */
     if (PyUnicode_GET_SIZE(self) == 1 &&
@@ -8145,7 +8145,7 @@ getnextarg(PyObject *args, Py_ssize_t arglen, Py_ssize_t *p_argidx)
 static Py_ssize_t
 strtounicode(Py_UNICODE *buffer, const char *charbuffer)
 {
-    register Py_ssize_t i;
+    Py_ssize_t i;
     Py_ssize_t len = strlen(charbuffer);
     for (i = len - 1; i >= 0; i--)
         buffer[i] = (Py_UNICODE) charbuffer[i];

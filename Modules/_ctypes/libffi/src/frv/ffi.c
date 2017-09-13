@@ -228,7 +228,7 @@ void ffi_closure_eabi (unsigned arg1, unsigned arg2, unsigned arg3,
       /* The caller allocates space for the return structure, and
        passes a pointer to this space in gr3.  Use this value directly
        as the return value.  */
-      register void *return_struct_ptr __asm__("gr3");
+      void *return_struct_ptr __asm__("gr3");
       (closure->fun) (cif, return_struct_ptr, avalue, closure->user_data);
     }
   else
