@@ -38,7 +38,7 @@ typedef unsigned long long uint64;
 static void
 ppc_getcounter(uint64 *v)
 {
-    register unsigned long tbu, tb, tbu2;
+    unsigned long tbu, tb, tbu2;
 
   loop:
     asm volatile ("mftbu %0" : "=r" (tbu) );
@@ -785,19 +785,19 @@ PyEval_EvalFrameEx(PyFrameObject *f, int throwflag)
 #ifdef DXPAIRS
     int lastopcode = 0;
 #endif
-    register PyObject **stack_pointer;  /* Next free slot in value stack */
-    register unsigned char *next_instr;
-    register int opcode;        /* Current opcode */
-    register int oparg;         /* Current opcode argument, if any */
-    register enum why_code why; /* Reason for block stack unwind */
-    register int err;           /* Error status -- nonzero if error */
-    register PyObject *x;       /* Result object -- NULL if error */
-    register PyObject *v;       /* Temporary objects popped off stack */
-    register PyObject *w;
-    register PyObject *u;
-    register PyObject *t;
-    register PyObject *stream = NULL;    /* for PRINT opcodes */
-    register PyObject **fastlocals, **freevars;
+    PyObject **stack_pointer;  /* Next free slot in value stack */
+    unsigned char *next_instr;
+    int opcode;        /* Current opcode */
+    int oparg;         /* Current opcode argument, if any */
+    enum why_code why; /* Reason for block stack unwind */
+    int err;           /* Error status -- nonzero if error */
+    PyObject *x;       /* Result object -- NULL if error */
+    PyObject *v;       /* Temporary objects popped off stack */
+    PyObject *w;
+    PyObject *u;
+    PyObject *t;
+    PyObject *stream = NULL;    /* for PRINT opcodes */
+    PyObject **fastlocals, **freevars;
     PyObject *retval = NULL;            /* Return value */
     PyThreadState *tstate = PyThreadState_GET();
     PyCodeObject *co;
@@ -1467,7 +1467,7 @@ PyEval_EvalFrameEx(PyFrameObject *f, int throwflag)
             v = TOP();
             if (PyInt_CheckExact(v) && PyInt_CheckExact(w)) {
                 /* INLINE: int + int */
-                register long a, b, i;
+                long a, b, i;
                 a = PyInt_AS_LONG(v);
                 b = PyInt_AS_LONG(w);
                 /* cast to avoid undefined behaviour
@@ -1501,7 +1501,7 @@ PyEval_EvalFrameEx(PyFrameObject *f, int throwflag)
             v = TOP();
             if (PyInt_CheckExact(v) && PyInt_CheckExact(w)) {
                 /* INLINE: int - int */
-                register long a, b, i;
+                long a, b, i;
                 a = PyInt_AS_LONG(v);
                 b = PyInt_AS_LONG(w);
                 /* cast to avoid undefined behaviour
@@ -1715,7 +1715,7 @@ PyEval_EvalFrameEx(PyFrameObject *f, int throwflag)
             v = TOP();
             if (PyInt_CheckExact(v) && PyInt_CheckExact(w)) {
                 /* INLINE: int + int */
-                register long a, b, i;
+                long a, b, i;
                 a = PyInt_AS_LONG(v);
                 b = PyInt_AS_LONG(w);
                 i = a + b;
@@ -1747,7 +1747,7 @@ PyEval_EvalFrameEx(PyFrameObject *f, int throwflag)
             v = TOP();
             if (PyInt_CheckExact(v) && PyInt_CheckExact(w)) {
                 /* INLINE: int - int */
-                register long a, b, i;
+                long a, b, i;
                 a = PyInt_AS_LONG(v);
                 b = PyInt_AS_LONG(w);
                 i = a - b;
@@ -2557,8 +2557,8 @@ PyEval_EvalFrameEx(PyFrameObject *f, int throwflag)
             v = TOP();
             if (PyInt_CheckExact(w) && PyInt_CheckExact(v)) {
                 /* INLINE: cmp(int, int) */
-                register long a, b;
-                register int res;
+                long a, b;
+                int res;
                 a = PyInt_AS_LONG(v);
                 b = PyInt_AS_LONG(w);
                 switch (oparg) {
@@ -3353,9 +3353,9 @@ PyEval_EvalCodeEx(PyCodeObject *co, PyObject *globals, PyObject *locals,
            PyObject **args, int argcount, PyObject **kws, int kwcount,
            PyObject **defs, int defcount, PyObject *closure)
 {
-    register PyFrameObject *f;
-    register PyObject *retval = NULL;
-    register PyObject **fastlocals, **freevars;
+    PyFrameObject *f;
+    PyObject *retval = NULL;
+    PyObject **fastlocals, **freevars;
     PyThreadState *tstate = PyThreadState_GET();
     PyObject *x, *u;
 
@@ -4019,7 +4019,7 @@ static int
 call_trace(Py_tracefunc func, PyObject *obj, PyFrameObject *frame,
            int what, PyObject *arg)
 {
-    register PyThreadState *tstate = frame->f_tstate;
+    PyThreadState *tstate = frame->f_tstate;
     int result;
     if (tstate->tracing)
         return 0;

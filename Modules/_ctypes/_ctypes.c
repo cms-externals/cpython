@@ -5772,8 +5772,8 @@ PyObject *My_PyUnicode_FromWideChar(register const wchar_t *w,
     memcpy(unicode->str, w, size * sizeof(wchar_t));
 #else
     {
-        register Py_UNICODE *u;
-        register int i;
+        Py_UNICODE *u;
+        int i;
         u = PyUnicode_AS_UNICODE(unicode);
         /* In Python, the following line has a one-off error */
         for (i = size; i > 0; i--)
@@ -5785,7 +5785,7 @@ PyObject *My_PyUnicode_FromWideChar(register const wchar_t *w,
 }
 
 Py_ssize_t My_PyUnicode_AsWideChar(PyUnicodeObject *unicode,
-                            register wchar_t *w,
+                            wchar_t *w,
                             Py_ssize_t size)
 {
     if (unicode == NULL) {
@@ -5798,8 +5798,8 @@ Py_ssize_t My_PyUnicode_AsWideChar(PyUnicodeObject *unicode,
     memcpy(w, unicode->str, size * sizeof(wchar_t));
 #else
     {
-        register Py_UNICODE *u;
-        register int i;
+        Py_UNICODE *u;
+        int i;
         u = PyUnicode_AS_UNICODE(unicode);
         /* In Python, the following line has a one-off error */
         for (i = size; i > 0; i--)
