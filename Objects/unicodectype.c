@@ -54,7 +54,7 @@ gettyperecord(Py_UNICODE code)
 /* Returns the titlecase Unicode characters corresponding to ch or just
    ch if no titlecase mapping is known. */
 
-Py_UNICODE _PyUnicode_ToTitlecase(register Py_UNICODE ch)
+Py_UNICODE _PyUnicode_ToTitlecase(Py_UNICODE ch)
 {
     const _PyUnicode_TypeRecord *ctype = gettyperecord(ch);
     int delta = ctype->title;

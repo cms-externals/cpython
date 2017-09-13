@@ -4821,7 +4821,7 @@ assign_slice(PyObject *u, PyObject *v, PyObject *w, PyObject *x)
                          "BaseException is not allowed in 3.x"
 
 static PyObject *
-cmp_outcome(int op, register PyObject *v, register PyObject *w)
+cmp_outcome(int op,PyObject *v,PyObject *w)
 {
     int res = 0;
     switch (op) {
