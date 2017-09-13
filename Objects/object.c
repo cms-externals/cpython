@@ -2230,7 +2230,7 @@ _Py_NewReference(PyObject *op)
 }
 
 void
-_Py_ForgetReference(register PyObject *op)
+_Py_ForgetReference(PyObject *op)
 {
 #ifdef SLOW_UNREF_CHECK
     PyObject *p;

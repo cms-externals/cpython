@@ -11,7 +11,7 @@
    one argument. */
 
 int
-PyArg_GetObject(register PyObject *args, int nargs, int i, PyObject **p_arg)
+PyArg_GetObject(PyObject *args, int nargs, int i, PyObject **p_arg)
 {
     if (nargs != 1) {
         if (args == NULL || !PyTuple_Check(args) ||
@@ -31,7 +31,7 @@ PyArg_GetObject(register PyObject *args, int nargs, int i, PyObject **p_arg)
 }
 
 int
-PyArg_GetLong(register PyObject *args, int nargs, int i, long *p_arg)
+PyArg_GetLong(PyObject *args, int nargs, int i, long *p_arg)
 {
     if (nargs != 1) {
         if (args == NULL || !PyTuple_Check(args) ||
@@ -49,7 +49,7 @@ PyArg_GetLong(register PyObject *args, int nargs, int i, long *p_arg)
 }
 
 int
-PyArg_GetShort(register PyObject *args, int nargs, int i, short *p_arg)
+PyArg_GetShort(PyObject *args, int nargs, int i, short *p_arg)
 {
     long x;
     if (!PyArg_GetLong(args, nargs, i, &x))
@@ -59,7 +59,7 @@ PyArg_GetShort(register PyObject *args, int nargs, int i, short *p_arg)
 }
 
 static int
-extractdouble(register PyObject *v, double *p_arg)
+extractdouble(PyObject *v, double *p_arg)
 {
     if (v == NULL) {
         /* Fall through to error return at end of function */
@@ -80,7 +80,7 @@ extractdouble(register PyObject *v, double *p_arg)
 }
 
 static int
-extractfloat(register PyObject *v, float *p_arg)
+extractfloat(PyObject *v, float *p_arg)
 {
     if (v == NULL) {
         /* Fall through to error return at end of function */
@@ -101,7 +101,7 @@ extractfloat(register PyObject *v, float *p_arg)
 }
 
 int
-PyArg_GetFloat(register PyObject *args, int nargs, int i, float *p_arg)
+PyArg_GetFloat(PyObject *args, int nargs, int i, float *p_arg)
 {
     PyObject *v;
     float x;

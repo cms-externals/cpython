@@ -222,7 +222,7 @@ class_lookup(PyClassObject *cp, PyObject *name, PyClassObject **pclass)
 }
 
 static PyObject *
-class_getattr(register PyClassObject *op, PyObject *name)
+class_getattr(PyClassObject *op, PyObject *name)
 {
     PyObject *v;
     char *sname;
@@ -628,7 +628,7 @@ instance_new(PyTypeObject* type, PyObject* args, PyObject *kw)
 
 
 static void
-instance_dealloc(register PyInstanceObject *inst)
+instance_dealloc(PyInstanceObject *inst)
 {
     PyObject *error_type, *error_value, *error_traceback;
     PyObject *del;
@@ -706,7 +706,7 @@ instance_dealloc(register PyInstanceObject *inst)
 }
 
 static PyObject *
-instance_getattr1(register PyInstanceObject *inst, PyObject *name)
+instance_getattr1(PyInstanceObject *inst, PyObject *name)
 {
     PyObject *v;
     char *sname;
@@ -742,7 +742,7 @@ instance_getattr1(register PyInstanceObject *inst, PyObject *name)
 }
 
 static PyObject *
-instance_getattr2(register PyInstanceObject *inst, PyObject *name)
+instance_getattr2(PyInstanceObject *inst, PyObject *name)
 {
     PyObject *v;
     PyClassObject *klass;
@@ -768,7 +768,7 @@ instance_getattr2(register PyInstanceObject *inst, PyObject *name)
 }
 
 static PyObject *
-instance_getattr(register PyInstanceObject *inst, PyObject *name)
+instance_getattr(PyInstanceObject *inst, PyObject *name)
 {
     PyObject *func, *res;
     res = instance_getattr1(inst, name);
@@ -2379,7 +2379,7 @@ instancemethod_new(PyTypeObject* type, PyObject* args, PyObject *kw)
 }
 
 static void
-instancemethod_dealloc(register PyMethodObject *im)
+instancemethod_dealloc(PyMethodObject *im)
 {
     _PyObject_GC_UNTRACK(im);
     if (im->im_weakreflist != NULL)

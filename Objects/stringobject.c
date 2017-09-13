@@ -760,7 +760,7 @@ PyObject *PyString_DecodeEscape(const char *s,
 /* object api */
 
 static Py_ssize_t
-string_getsize(register PyObject *op)
+string_getsize(PyObject *op)
 {
     char *s;
     Py_ssize_t len;
@@ -770,7 +770,7 @@ string_getsize(register PyObject *op)
 }
 
 static /*const*/ char *
-string_getbuffer(register PyObject *op)
+string_getbuffer(PyObject *op)
 {
     char *s;
     Py_ssize_t len;
@@ -780,7 +780,7 @@ string_getbuffer(register PyObject *op)
 }
 
 Py_ssize_t
-PyString_Size(register PyObject *op)
+PyString_Size(PyObject *op)
 {
     if (!PyString_Check(op))
         return string_getsize(op);
@@ -788,7 +788,7 @@ PyString_Size(register PyObject *op)
 }
 
 /*const*/ char *
-PyString_AsString(register PyObject *op)
+PyString_AsString(PyObject *op)
 {
     if (!PyString_Check(op))
         return string_getbuffer(op);
@@ -796,7 +796,7 @@ PyString_AsString(register PyObject *op)
 }
 
 int
-PyString_AsStringAndSize(register PyObject *obj,
+PyString_AsStringAndSize(PyObject *obj,
                          char **s,
                          Py_ssize_t *len)
 {
@@ -1013,7 +1013,7 @@ string_length(PyStringObject *a)
 }
 
 static PyObject *
-string_concat(register PyStringObject *a, register PyObject *bb)
+string_concat(PyStringObject *a,PyObject *bb)
 {
     Py_ssize_t size;
     PyStringObject *op;
@@ -1072,7 +1072,7 @@ string_concat(register PyStringObject *a, register PyObject *bb)
 }
 
 static PyObject *
-string_repeat(register PyStringObject *a, register Py_ssize_t n)
+string_repeat(PyStringObject *a,Py_ssize_t n)
 {
     Py_ssize_t i;
     Py_ssize_t j;
@@ -1127,7 +1127,7 @@ string_repeat(register PyStringObject *a, register Py_ssize_t n)
 /* String slice a[i:j] consists of characters a[i] ... a[j-1] */
 
 static PyObject *
-string_slice(register PyStringObject *a, register Py_ssize_t i,
+string_slice(PyStringObject *a,Py_ssize_t i,
              Py_ssize_t j)
      /* j -- may be negative! */
 {
@@ -1167,7 +1167,7 @@ string_contains(PyObject *str_obj, PyObject *sub_obj)
 }
 
 static PyObject *
-string_item(PyStringObject *a, register Py_ssize_t i)
+string_item(PyStringObject *a,Py_ssize_t i)
 {
     char pchar;
     PyObject *v;
@@ -3846,7 +3846,7 @@ PyTypeObject PyString_Type = {
 };
 
 void
-PyString_Concat(register PyObject **pv, register PyObject *w)
+PyString_Concat(PyObject **pv,PyObject *w)
 {
     PyObject *v;
     if (*pv == NULL)
@@ -3860,7 +3860,7 @@ PyString_Concat(register PyObject **pv, register PyObject *w)
 }
 
 void
-PyString_ConcatAndDel(register PyObject **pv, register PyObject *w)
+PyString_ConcatAndDel(PyObject **pv,PyObject *w)
 {
     PyString_Concat(pv, w);
     Py_XDECREF(w);

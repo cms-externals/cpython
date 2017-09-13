@@ -140,7 +140,7 @@ int_dealloc(PyIntObject *v)
 }
 
 long
-PyInt_AsLong(register PyObject *op)
+PyInt_AsLong(PyObject *op)
 {
     PyNumberMethods *nb;
     PyIntObject *io;
@@ -200,7 +200,7 @@ _PyInt_AsInt(PyObject *obj)
 }
 
 Py_ssize_t
-PyInt_AsSsize_t(register PyObject *op)
+PyInt_AsSsize_t(PyObject *op)
 {
 #if SIZEOF_SIZE_T != SIZEOF_LONG
     PyNumberMethods *nb;
@@ -259,7 +259,7 @@ PyInt_AsSsize_t(register PyObject *op)
 }
 
 unsigned long
-PyInt_AsUnsignedLongMask(register PyObject *op)
+PyInt_AsUnsignedLongMask(PyObject *op)
 {
     PyNumberMethods *nb;
     PyIntObject *io;
@@ -304,7 +304,7 @@ PyInt_AsUnsignedLongMask(register PyObject *op)
 
 #ifdef HAVE_LONG_LONG
 unsigned PY_LONG_LONG
-PyInt_AsUnsignedLongLongMask(register PyObject *op)
+PyInt_AsUnsignedLongLongMask(PyObject *op)
 {
     PyNumberMethods *nb;
     PyIntObject *io;
@@ -576,7 +576,7 @@ enum divmod_result {
 };
 
 static enum divmod_result
-i_divmod(register long x, register long y,
+i_divmod(long x,long y,
          long *p_xdivy, long *p_xmody)
 {
     long xdivy, xmody;

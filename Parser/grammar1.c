@@ -9,7 +9,7 @@
 /* Return the DFA for the given type */
 
 dfa *
-PyGrammar_FindDFA(grammar *g, register int type)
+PyGrammar_FindDFA(grammar *g,int type)
 {
     dfa *d;
 #if 1

@@ -70,7 +70,7 @@ NULL if the rich comparison returns an error.
 */
 
 static setentry *
-set_lookkey(PySetObject *so, PyObject *key, register long hash)
+set_lookkey(PySetObject *so, PyObject *key,long hash)
 {
     Py_ssize_t i;
     size_t perturb;
@@ -152,7 +152,7 @@ set_lookkey(PySetObject *so, PyObject *key, register long hash)
  * see if the comparison altered the table.
  */
 static setentry *
-set_lookkey_string(PySetObject *so, PyObject *key, register long hash)
+set_lookkey_string(PySetObject *so, PyObject *key,long hash)
 {
     Py_ssize_t i;
     size_t perturb;
@@ -206,7 +206,7 @@ Used by the public insert routine.
 Eats a reference to key.
 */
 static int
-set_insert_key(register PySetObject *so, PyObject *key, long hash)
+set_insert_key(PySetObject *so, PyObject *key, long hash)
 {
     setentry *entry;
 
@@ -242,7 +242,7 @@ Note that no refcounts are changed by this routine; if needed, the caller
 is responsible for incref'ing `key`.
 */
 static void
-set_insert_clean(register PySetObject *so, PyObject *key, long hash)
+set_insert_clean(PySetObject *so, PyObject *key, long hash)
 {
     size_t i;
     size_t perturb;
@@ -355,7 +355,7 @@ set_table_resize(PySetObject *so, Py_ssize_t minused)
 /* CAUTION: set_add_key/entry() must guarantee it won't resize the table */
 
 static int
-set_add_entry(register PySetObject *so, setentry *entry)
+set_add_entry(PySetObject *so, setentry *entry)
 {
     Py_ssize_t n_used;
     PyObject *key = entry->key;
@@ -374,7 +374,7 @@ set_add_entry(register PySetObject *so, setentry *entry)
 }
 
 static int
-set_add_key(register PySetObject *so, PyObject *key)
+set_add_key(PySetObject *so, PyObject *key)
 {
     long hash;
     Py_ssize_t n_used;
