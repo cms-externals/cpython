@@ -49,7 +49,7 @@ ffi_status
 ffi_prep_cif_machdep(ffi_cif *cif)
 {
   /* Adjust cif->bytes to represent a minimum 6 words for the temporary
-     register argument loading area.  */
+     argument loading area.  */
   if (cif->bytes < 6*FFI_SIZEOF_ARG)
     cif->bytes = 6*FFI_SIZEOF_ARG;
 

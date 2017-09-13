@@ -56,7 +56,7 @@ static PyObject *interned;
 PyObject *
 PyString_FromStringAndSize(const char *str, Py_ssize_t size)
 {
-    register PyStringObject *op;
+    PyStringObject *op;
     if (size < 0) {
         PyErr_SetString(PyExc_SystemError,
             "Negative size passed to PyString_FromStringAndSize");
@@ -114,8 +114,8 @@ PyString_FromStringAndSize(const char *str, Py_ssize_t size)
 PyObject *
 PyString_FromString(const char *str)
 {
-    register size_t size;
-    register PyStringObject *op;
+    size_t size;
+    PyStringObject *op;
 
     assert(str != NULL);
     size = strlen(str);
@@ -803,8 +803,8 @@ PyString_AsString(register PyObject *op)
 
 int
 PyString_AsStringAndSize(register PyObject *obj,
-                         register char **s,
-                         register Py_ssize_t *len)
+                         char **s,
+                         Py_ssize_t *len)
 {
     if (s == NULL) {
         PyErr_BadInternalCall();
@@ -931,7 +931,7 @@ string_print(PyStringObject *op, FILE *fp, int flags)
 PyObject *
 PyString_Repr(PyObject *obj, int smartquotes)
 {
-    register PyStringObject* op = (PyStringObject*) obj;
+    PyStringObject* op = (PyStringObject*) obj;
     size_t newsize;
     PyObject *v;
     if (Py_SIZE(op) > (PY_SSIZE_T_MAX - 2)/4) {
@@ -945,9 +945,9 @@ PyString_Repr(PyObject *obj, int smartquotes)
         return NULL;
     }
     else {
-        register Py_ssize_t i;
-        register char c;
-        register char *p;
+        Py_ssize_t i;
+        char c;
+        char *p;
         int quote;
 
         /* figure out which quote to use; single is preferred */
@@ -1021,8 +1021,8 @@ string_length(PyStringObject *a)
 static PyObject *
 string_concat(register PyStringObject *a, register PyObject *bb)
 {
-    register Py_ssize_t size;
-    register PyStringObject *op;
+    Py_ssize_t size;
+    PyStringObject *op;
     if (!PyString_Check(bb)) {
 #ifdef Py_USING_UNICODE
         if (PyUnicode_Check(bb))
@@ -1080,10 +1080,10 @@ string_concat(register PyStringObject *a, register PyObject *bb)
 static PyObject *
 string_repeat(register PyStringObject *a, register Py_ssize_t n)
 {
-    register Py_ssize_t i;
-    register Py_ssize_t j;
-    register Py_ssize_t size;
-    register PyStringObject *op;
+    Py_ssize_t i;
+    Py_ssize_t j;
+    Py_ssize_t size;
+    PyStringObject *op;
     size_t nbytes;
     if (n < 0)
         n = 0;
@@ -1134,7 +1134,7 @@ string_repeat(register PyStringObject *a, register Py_ssize_t n)
 
 static PyObject *
 string_slice(register PyStringObject *a, register Py_ssize_t i,
-             register Py_ssize_t j)
+             Py_ssize_t j)
      /* j -- may be negative! */
 {
     if (i < 0)
@@ -1268,9 +1268,9 @@ _PyString_Eq(PyObject *o1, PyObject *o2)
 static long
 string_hash(PyStringObject *a)
 {
-    register Py_ssize_t len;
-    register unsigned char *p;
-    register long x;
+    Py_ssize_t len;
+    unsigned char *p;
+    long x;
 
 #ifdef Py_DEBUG
     assert(_Py_HashSecret_Initialized);
@@ -2203,9 +2203,9 @@ the operation simply removes the characters in deletechars.");
 static PyObject *
 string_translate(PyStringObject *self, PyObject *args)
 {
-    register char *input, *output;
+    char *input, *output;
     const char *table;
-    register Py_ssize_t i, c, changed = 0;
+    Py_ssize_t i, c, changed = 0;
     PyObject *input_obj = (PyObject*)self;
     const char *output_start, *del_table=NULL;
     Py_ssize_t inlen, tablen, dellen = 0;
@@ -3315,9 +3315,9 @@ and there is at least one character in S, False otherwise.");
 static PyObject*
 string_isspace(PyStringObject *self)
 {
-    register const unsigned char *p
+    const unsigned char *p
         = (unsigned char *) PyString_AS_STRING(self);
-    register const unsigned char *e;
+    const unsigned char *e;
 
     /* Shortcut for single character strings */
     if (PyString_GET_SIZE(self) == 1 &&
@@ -3346,9 +3346,9 @@ and there is at least one character in S, False otherwise.");
 static PyObject*
 string_isalpha(PyStringObject *self)
 {
-    register const unsigned char *p
+    const unsigned char *p
         = (unsigned char *) PyString_AS_STRING(self);
-    register const unsigned char *e;
+    const unsigned char *e;
 
     /* Shortcut for single character strings */
     if (PyString_GET_SIZE(self) == 1 &&
@@ -3377,9 +3377,9 @@ and there is at least one character in S, False otherwise.");
 static PyObject*
 string_isalnum(PyStringObject *self)
 {
-    register const unsigned char *p
+    const unsigned char *p
         = (unsigned char *) PyString_AS_STRING(self);
-    register const unsigned char *e;
+    const unsigned char *e;
 
     /* Shortcut for single character strings */
     if (PyString_GET_SIZE(self) == 1 &&
@@ -3408,9 +3408,9 @@ and there is at least one character in S, False otherwise.");
 static PyObject*
 string_isdigit(PyStringObject *self)
 {
-    register const unsigned char *p
+    const unsigned char *p
         = (unsigned char *) PyString_AS_STRING(self);
-    register const unsigned char *e;
+    const unsigned char *e;
 
     /* Shortcut for single character strings */
     if (PyString_GET_SIZE(self) == 1 &&
@@ -3439,9 +3439,9 @@ at least one cased character in S, False otherwise.");
 static PyObject*
 string_islower(PyStringObject *self)
 {
-    register const unsigned char *p
+    const unsigned char *p
         = (unsigned char *) PyString_AS_STRING(self);
-    register const unsigned char *e;
+    const unsigned char *e;
     int cased;
 
     /* Shortcut for single character strings */
@@ -3473,9 +3473,9 @@ at least one cased character in S, False otherwise.");
 static PyObject*
 string_isupper(PyStringObject *self)
 {
-    register const unsigned char *p
+    const unsigned char *p
         = (unsigned char *) PyString_AS_STRING(self);
-    register const unsigned char *e;
+    const unsigned char *e;
     int cased;
 
     /* Shortcut for single character strings */
@@ -3509,9 +3509,9 @@ otherwise.");
 static PyObject*
 string_istitle(PyStringObject *self, PyObject *uncased)
 {
-    register const unsigned char *p
+    const unsigned char *p
         = (unsigned char *) PyString_AS_STRING(self);
-    register const unsigned char *e;
+    const unsigned char *e;
     int cased, previous_is_cased;
 
     /* Shortcut for single character strings */
@@ -3526,7 +3526,7 @@ string_istitle(PyStringObject *self, PyObject *uncased)
     cased = 0;
     previous_is_cased = 0;
     for (; p < e; p++) {
-        register const unsigned char ch = *p;
+        const unsigned char ch = *p;
 
         if (isupper(ch)) {
             if (previous_is_cased)
@@ -3854,7 +3854,7 @@ PyTypeObject PyString_Type = {
 void
 PyString_Concat(register PyObject **pv, register PyObject *w)
 {
-    register PyObject *v;
+    PyObject *v;
     if (*pv == NULL)
         return;
     if (w == NULL || !PyString_Check(*pv)) {
@@ -3890,8 +3890,8 @@ PyString_ConcatAndDel(register PyObject **pv, register PyObject *w)
 int
 _PyString_Resize(PyObject **pv, Py_ssize_t newsize)
 {
-    register PyObject *v;
-    register PyStringObject *sv;
+    PyObject *v;
+    PyStringObject *sv;
     v = *pv;
     if (!PyString_Check(v) || Py_REFCNT(v) != 1 || newsize < 0 ||
         PyString_CHECK_INTERNED(v)) {
@@ -4743,7 +4743,7 @@ PyString_Format(PyObject *format, PyObject *args)
 void
 PyString_InternInPlace(PyObject **p)
 {
-    register PyStringObject *s = (PyStringObject *)(*p);
+    PyStringObject *s = (PyStringObject *)(*p);
     PyObject *t;
     if (s == NULL || !PyString_Check(s))
         Py_FatalError("PyString_InternInPlace: strings only please!");

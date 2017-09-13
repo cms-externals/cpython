@@ -452,7 +452,7 @@ ffi_prep_cif_machdep(ffi_cif *cif)
 
 	  /* On 31-bit machines, 64-bit integers are passed in GPR pairs,
 	     if one is still available, or else on the stack.  If only one
-	     register is free, skip the register (it won't be used for any 
+	     is free, skip the register (it won't be used for any 
 	     subsequent argument either).  */
 	      
 #ifndef __s390x__
