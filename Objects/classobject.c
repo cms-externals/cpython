@@ -222,10 +222,10 @@ class_lookup(PyClassObject *cp, PyObject *name, PyClassObject **pclass)
 }
 
 static PyObject *
-class_getattr(register PyClassObject *op, PyObject *name)
+class_getattr(PyClassObject *op, PyObject *name)
 {
-    register PyObject *v;
-    register char *sname;
+    PyObject *v;
+    char *sname;
     PyClassObject *klass;
     descrgetfunc f;
 
@@ -549,7 +549,7 @@ PyInstance_NewRaw(PyObject *klass, PyObject *dict)
 PyObject *
 PyInstance_New(PyObject *klass, PyObject *arg, PyObject *kw)
 {
-    register PyInstanceObject *inst;
+    PyInstanceObject *inst;
     PyObject *init;
     static PyObject *initstr;
 
@@ -628,7 +628,7 @@ instance_new(PyTypeObject* type, PyObject* args, PyObject *kw)
 
 
 static void
-instance_dealloc(register PyInstanceObject *inst)
+instance_dealloc(PyInstanceObject *inst)
 {
     PyObject *error_type, *error_value, *error_traceback;
     PyObject *del;
@@ -706,10 +706,10 @@ instance_dealloc(register PyInstanceObject *inst)
 }
 
 static PyObject *
-instance_getattr1(register PyInstanceObject *inst, PyObject *name)
+instance_getattr1(PyInstanceObject *inst, PyObject *name)
 {
-    register PyObject *v;
-    register char *sname;
+    PyObject *v;
+    char *sname;
 
     if (!PyString_Check(name)) {
         PyErr_SetString(PyExc_TypeError, "attribute name must be a string");
@@ -742,9 +742,9 @@ instance_getattr1(register PyInstanceObject *inst, PyObject *name)
 }
 
 static PyObject *
-instance_getattr2(register PyInstanceObject *inst, PyObject *name)
+instance_getattr2(PyInstanceObject *inst, PyObject *name)
 {
-    register PyObject *v;
+    PyObject *v;
     PyClassObject *klass;
     descrgetfunc f;
 
@@ -768,9 +768,9 @@ instance_getattr2(register PyInstanceObject *inst, PyObject *name)
 }
 
 static PyObject *
-instance_getattr(register PyInstanceObject *inst, PyObject *name)
+instance_getattr(PyInstanceObject *inst, PyObject *name)
 {
-    register PyObject *func, *res;
+    PyObject *func, *res;
     res = instance_getattr1(inst, name);
     if (res == NULL && (func = inst->in_class->cl_getattr) != NULL) {
         PyObject *args;
@@ -2252,7 +2252,7 @@ PyTypeObject PyInstance_Type = {
 PyObject *
 PyMethod_New(PyObject *func, PyObject *self, PyObject *klass)
 {
-    register PyMethodObject *im;
+    PyMethodObject *im;
     im = free_list;
     if (im != NULL) {
         free_list = (PyMethodObject *)(im->im_self);
@@ -2379,7 +2379,7 @@ instancemethod_new(PyTypeObject* type, PyObject* args, PyObject *kw)
 }
 
 static void
-instancemethod_dealloc(register PyMethodObject *im)
+instancemethod_dealloc(PyMethodObject *im)
 {
     _PyObject_GC_UNTRACK(im);
     if (im->im_weakreflist != NULL)

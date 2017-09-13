@@ -1611,8 +1611,8 @@ PyObject_Not(PyObject *v)
 int
 PyNumber_CoerceEx(PyObject **pv, PyObject **pw)
 {
-    register PyObject *v = *pv;
-    register PyObject *w = *pw;
+    PyObject *v = *pv;
+    PyObject *w = *pw;
     int res;
 
     /* Shortcut only for old-style types */
@@ -2230,10 +2230,10 @@ _Py_NewReference(PyObject *op)
 }
 
 void
-_Py_ForgetReference(register PyObject *op)
+_Py_ForgetReference(PyObject *op)
 {
 #ifdef SLOW_UNREF_CHECK
-    register PyObject *p;
+    PyObject *p;
 #endif
     if (op->ob_refcnt < 0)
         Py_FatalError("UNREF negative refcnt");

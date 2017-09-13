@@ -854,7 +854,7 @@ error_clear:
 /* Get next char, updating state; error code goes into tok->done */
 
 static int
-tok_nextc(register struct tok_state *tok)
+tok_nextc(struct tok_state *tok)
 {
     for (;;) {
         if (tok->cur != tok->inp) {
@@ -1027,7 +1027,7 @@ tok_nextc(register struct tok_state *tok)
 /* Back-up one character */
 
 static void
-tok_backup(register struct tok_state *tok, register int c)
+tok_backup(struct tok_state *tok,int c)
 {
     if (c != EOF) {
         if (--tok->cur < tok->buf)
@@ -1213,9 +1213,9 @@ indenterror(struct tok_state *tok)
 /* Get next token, after space stripping etc. */
 
 static int
-tok_get(register struct tok_state *tok, char **p_start, char **p_end)
+tok_get(struct tok_state *tok, char **p_start, char **p_end)
 {
-    register int c;
+    int c;
     int blankline;
 
     *p_start = *p_end = NULL;
@@ -1225,8 +1225,8 @@ tok_get(register struct tok_state *tok, char **p_start, char **p_end)
 
     /* Get indentation level */
     if (tok->atbol) {
-        register int col = 0;
-        register int altcol = 0;
+        int col = 0;
+        int altcol = 0;
         tok->atbol = 0;
         for (;;) {
             c = tok_nextc(tok);

@@ -86,7 +86,7 @@ Py_ssize_t quick_neg_int_allocs;
 PyObject *
 PyInt_FromLong(long ival)
 {
-    register PyIntObject *v;
+    PyIntObject *v;
 #if NSMALLNEGINTS + NSMALLPOSINTS > 0
     if (-NSMALLNEGINTS <= ival && ival < NSMALLPOSINTS) {
         v = small_ints[ival + NSMALLNEGINTS];
@@ -140,7 +140,7 @@ int_dealloc(PyIntObject *v)
 }
 
 long
-PyInt_AsLong(register PyObject *op)
+PyInt_AsLong(PyObject *op)
 {
     PyNumberMethods *nb;
     PyIntObject *io;
@@ -200,7 +200,7 @@ _PyInt_AsInt(PyObject *obj)
 }
 
 Py_ssize_t
-PyInt_AsSsize_t(register PyObject *op)
+PyInt_AsSsize_t(PyObject *op)
 {
 #if SIZEOF_SIZE_T != SIZEOF_LONG
     PyNumberMethods *nb;
@@ -259,7 +259,7 @@ PyInt_AsSsize_t(register PyObject *op)
 }
 
 unsigned long
-PyInt_AsUnsignedLongMask(register PyObject *op)
+PyInt_AsUnsignedLongMask(PyObject *op)
 {
     PyNumberMethods *nb;
     PyIntObject *io;
@@ -304,7 +304,7 @@ PyInt_AsUnsignedLongMask(register PyObject *op)
 
 #ifdef HAVE_LONG_LONG
 unsigned PY_LONG_LONG
-PyInt_AsUnsignedLongLongMask(register PyObject *op)
+PyInt_AsUnsignedLongLongMask(PyObject *op)
 {
     PyNumberMethods *nb;
     PyIntObject *io;
@@ -449,8 +449,8 @@ int_print(PyIntObject *v, FILE *fp, int flags)
 static int
 int_compare(PyIntObject *v, PyIntObject *w)
 {
-    register long i = v->ob_ival;
-    register long j = w->ob_ival;
+    long i = v->ob_ival;
+    long j = w->ob_ival;
     return (i < j) ? -1 : (i > j) ? 1 : 0;
 }
 
@@ -468,7 +468,7 @@ int_hash(PyIntObject *v)
 static PyObject *
 int_add(PyIntObject *v, PyIntObject *w)
 {
-    register long a, b, x;
+    long a, b, x;
     CONVERT_TO_LONG(v, a);
     CONVERT_TO_LONG(w, b);
     /* casts in the line below avoid undefined behaviour on overflow */
@@ -481,7 +481,7 @@ int_add(PyIntObject *v, PyIntObject *w)
 static PyObject *
 int_sub(PyIntObject *v, PyIntObject *w)
 {
-    register long a, b, x;
+    long a, b, x;
     CONVERT_TO_LONG(v, a);
     CONVERT_TO_LONG(w, b);
     /* casts in the line below avoid undefined behaviour on overflow */
@@ -576,7 +576,7 @@ enum divmod_result {
 };
 
 static enum divmod_result
-i_divmod(register long x, register long y,
+i_divmod(long x,long y,
          long *p_xdivy, long *p_xmody)
 {
     long xdivy, xmody;
@@ -725,7 +725,7 @@ int_divmod(PyIntObject *x, PyIntObject *y)
 static PyObject *
 int_pow(PyIntObject *v, PyIntObject *w, PyIntObject *z)
 {
-    register long iv, iw, iz=0, ix, temp, prev;
+    long iv, iw, iz=0, ix, temp, prev;
     CONVERT_TO_LONG(v, iv);
     CONVERT_TO_LONG(w, iw);
     if (iw < 0) {
@@ -810,7 +810,7 @@ int_pow(PyIntObject *v, PyIntObject *w, PyIntObject *z)
 static PyObject *
 int_neg(PyIntObject *v)
 {
-    register long a;
+    long a;
     a = v->ob_ival;
     /* check for overflow */
     if (UNARY_NEG_WOULD_OVERFLOW(a)) {
@@ -895,7 +895,7 @@ int_lshift(PyIntObject *v, PyIntObject *w)
 static PyObject *
 int_rshift(PyIntObject *v, PyIntObject *w)
 {
-    register long a, b;
+    long a, b;
     CONVERT_TO_LONG(v, a);
     CONVERT_TO_LONG(w, b);
     if (b < 0) {
@@ -919,7 +919,7 @@ int_rshift(PyIntObject *v, PyIntObject *w)
 static PyObject *
 int_and(PyIntObject *v, PyIntObject *w)
 {
-    register long a, b;
+    long a, b;
     CONVERT_TO_LONG(v, a);
     CONVERT_TO_LONG(w, b);
     return PyInt_FromLong(a & b);
@@ -928,7 +928,7 @@ int_and(PyIntObject *v, PyIntObject *w)
 static PyObject *
 int_xor(PyIntObject *v, PyIntObject *w)
 {
-    register long a, b;
+    long a, b;
     CONVERT_TO_LONG(v, a);
     CONVERT_TO_LONG(w, b);
     return PyInt_FromLong(a ^ b);
@@ -937,7 +937,7 @@ int_xor(PyIntObject *v, PyIntObject *w)
 static PyObject *
 int_or(PyIntObject *v, PyIntObject *w)
 {
-    register long a, b;
+    long a, b;
     CONVERT_TO_LONG(v, a);
     CONVERT_TO_LONG(w, b);
     return PyInt_FromLong(a | b);
